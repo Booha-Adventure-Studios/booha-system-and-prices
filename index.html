@@ -1,91 +1,782 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Slideshow</title>
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-  <style>
-    body {
-      margin: 0;
-      font-family: sans-serif;
-      background: #f2f2f2;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .swiper {
-      width: 95%;
-      max-width: 900px;
-      height: 90vh;
-    }
-    .swiper-slide img {
-      width: 100%;
-      height: auto;
-      object-fit: contain;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>学習システムとレッスン料金 2026 / Our Learning System & Lesson Prices 2026</title>
+
+<!-- Fonts (English = Cinzel, Japanese = Noto Sans JP) -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --dark:#020617;
+  --ink:#e5e7eb;
+  --muted:#9ca3af;
+  --accent:#7dd3fc;
+  --accentSoft:#4ade80;
+  --gold:#facc6b;
+  --radius:10px;
+  --maxWidth:980px;
+
+  /* Booha tab colors */
+  --tab1:#fb7185; /* soft pink */
+  --tab2:#4ade80; /* mint */
+  --tab3:#60a5fa; /* sky blue */
+  --tab4:#a855f7; /* purple */
+  --tab5:#facc15; /* gold */
+}
+
+/* Reset */
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  width:100%;
+  min-height:100%;
+}
+
+/* Background & body font */
+body{
+  font-family:'Noto Sans JP', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(circle at top, #1d294f 0, #020617 45%, #000 100%);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  font-size:15px; /* body text slightly smaller than default */
+}
+
+/* Language radios (for JP/EN toggle – no JS) */
+#lang-jp,
+#lang-en{
+  display:none;
+}
+
+/* Wrapper */
+.wrapper{
+  max-width:var(--maxWidth);
+  margin:0 auto;
+  padding:20px 16px 72px;
+  position:relative;
+}
+
+/* Simple star sparkle layer */
+.wrapper::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(248,250,252,.08) 0, transparent 50%),
+    radial-gradient(circle at 80% 10%, rgba(248,250,252,.10) 0, transparent 55%),
+    radial-gradient(circle at 50% 80%, rgba(248,250,252,.06) 0, transparent 50%);
+  opacity:0.7;
+  mix-blend-mode:screen;
+  z-index:-1;
+}
+
+/* Back button */
+.top-nav{
+  display:flex;
+  justify-content:flex-start;
+  margin-bottom:16px;
+}
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 16px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.6);
+  background:radial-gradient(circle at top left,#0f172a,#020617 60%,#000 100%);
+  color:var(--ink);
+  font-size:0.9rem;
+  text-decoration:none;
+  cursor:pointer;
+  box-shadow:
+    0 0 12px rgba(148,163,184,.4),
+    0 0 24px rgba(15,23,42,.9);
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .1s ease,
+    border-color .25s ease;
+}
+.back-btn::before{
+  content:"←";
+  font-family:'Cinzel', serif;
+  font-size:0.95rem;
+}
+.back-btn:hover{
+  border-color:var(--accent);
+  background:radial-gradient(circle at top left,#0ea5e9,#020617 70%,#000 100%);
+  box-shadow:
+    0 0 16px rgba(56,189,248,.8),
+    0 0 40px rgba(15,23,42,.9);
+  transform:translateY(-1px);
+}
+
+/* Header */
+.page-header{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+/* Japanese title (Noto Sans JP bold) */
+.title-jp{
+  font-family:'Noto Sans JP', sans-serif;
+  font-weight:700;
+  letter-spacing:0.06em;
+  font-size:1.9rem;
+  color:var(--gold);
+  text-shadow:0 0 12px rgba(250,204,21,.6),
+               0 0 32px rgba(56,189,248,.3);
+}
+
+/* JP title spans: desktop vs mobile */
+.title-jp-desktop{
+  display:inline;
+}
+.title-jp-mobile{
+  display:none;
+}
+
+/* English title (Cinzel) */
+.title-en{
+  font-family:'Cinzel', serif;
+  font-weight:900;
+  letter-spacing:0.04em;
+  font-size:1.9rem;
+  color:var(--gold);
+  text-shadow:0 0 12px rgba(250,204,21,.6),
+               0 0 32px rgba(56,189,248,.3);
+}
+
+.subtitle-jp,
+.subtitle-en{
+  margin-top:6px;
+  font-size:0.95rem;
+  color:var(--muted);
+}
+
+/* Base visibility: show JP, hide EN */
+.title-jp,
+.subtitle-jp,
+.jp-label,
+.jp-text{
+  display:block;
+}
+.title-en,
+.subtitle-en,
+.en-label,
+.en-text{
+  display:none;
+}
+
+/* Language toggle bar */
+.lang-toggle-bar{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:18px auto 24px;
+}
+.lang-btn{
+  min-width:120px;
+  padding:8px 16px;
+  border-radius:999px;
+  border:1px solid rgba(148,163,184,.5);
+  background:linear-gradient(135deg, rgba(15,23,42,.95), rgba(15,23,42,.7));
+  color:var(--muted);
+  font-size:0.9rem;
+  cursor:pointer;
+  text-align:center;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease,
+    transform .1s ease;
+}
+
+/* When Japanese is active */
+#lang-jp:checked ~ .wrapper .title-jp,
+#lang-jp:checked ~ .wrapper .subtitle-jp,
+#lang-jp:checked ~ .wrapper .jp-label,
+#lang-jp:checked ~ .wrapper .jp-text{
+  display:block;
+}
+#lang-jp:checked ~ .wrapper .title-en,
+#lang-jp:checked ~ .wrapper .subtitle-en,
+#lang-jp:checked ~ .wrapper .en-label,
+#lang-jp:checked ~ .wrapper .en-text{
+  display:none;
+}
+#lang-jp:checked ~ .wrapper .lang-toggle-bar label[for="lang-jp"]{
+  color:#e5e7eb;
+  border-color:var(--accent);
+  box-shadow:
+    0 0 12px rgba(125,211,252,.9),
+    0 0 32px rgba(168,85,247,.4);
+  background:radial-gradient(circle at top left,#0ea5e9,#1d4ed8 42%,#020617 100%);
+  transform:translateY(-1px);
+}
+
+/* When English is active */
+#lang-en:checked ~ .wrapper .title-jp,
+#lang-en:checked ~ .wrapper .subtitle-jp,
+#lang-en:checked ~ .wrapper .jp-label,
+#lang-en:checked ~ .wrapper .jp-text{
+  display:none;
+}
+#lang-en:checked ~ .wrapper .title-en,
+#lang-en:checked ~ .wrapper .subtitle-en,
+#lang-en:checked ~ .wrapper .en-label,
+#lang-en:checked ~ .wrapper .en-text{
+  display:block;
+}
+#lang-en:checked ~ .wrapper .lang-toggle-bar label[for="lang-en"]{
+  color:#e5e7eb;
+  border-color:var(--accent);
+  box-shadow:
+    0 0 12px rgba(125,211,252,.9),
+    0 0 32px rgba(168,85,247,.4);
+  background:radial-gradient(circle at top left,#0ea5e9,#1d4ed8 42%,#020617 100%);
+  transform:translateY(-1px);
+}
+
+/* Intro panel */
+.intro-panel{
+  background:linear-gradient(145deg, rgba(15,23,42,.95), rgba(15,23,42,.85));
+  border-radius:var(--radius);
+  border:1px solid rgba(148,163,184,.6);
+  padding:18px 16px;
+  margin-bottom:20px;
+  box-shadow:
+    0 0 24px rgba(15,23,42,.9),
+    0 0 40px rgba(15,23,42,.8);
+}
+.intro-panel p{
+  font-size:0.95rem;
+  line-height:1.7;
+  color:var(--ink);
+}
+
+/* Accordion container */
+.accordion-set{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+/* Native details block styled like panels */
+.accordion details{
+  background:linear-gradient(145deg, rgba(15,23,42,.98), rgba(15,23,42,.88));
+  border-radius:var(--radius);
+  border:1px solid rgba(148,163,184,.5);
+  overflow:hidden;
+  box-shadow:
+    0 0 20px rgba(15,23,42,.9),
+    0 0 32px rgba(15,23,42,.8);
+}
+
+/* Remove default marker */
+.accordion summary{
+  list-style:none;
+}
+.accordion summary::-webkit-details-marker{
+  display:none;
+}
+
+/* Header (clickable area) */
+.acc-header{
+  width:100%;
+  padding:14px 18px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  cursor:pointer;
+}
+.acc-title{
+  font-size:1rem;
+  font-weight:600;
+  color:var(--ink);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.acc-index{
+  font-family:'Cinzel', serif;
+  font-size:0.9rem;
+  color:var(--accent);
+  margin-right:4px;
+}
+.chevron{
+  width:14px;
+  height:14px;
+  border-right:2px solid var(--muted);
+  border-bottom:2px solid var(--muted);
+  transform:rotate(45deg);
+  transition:transform .25s ease, border-color .25s ease;
+}
+
+/* Body */
+.acc-body{
+  padding:0 18px 16px 18px;
+  font-size:0.95rem;
+  line-height:1.8;
+  color:var(--ink);
+}
+
+/* Base open state (fallback if no JS colors) */
+.accordion details[open]{
+  border-color:var(--accent);
+  box-shadow:
+    0 0 14px rgba(125,211,252,.8),
+    0 0 40px rgba(59,130,246,.5);
+}
+.accordion details[open] .chevron{
+  transform:rotate(225deg);
+  border-color:var(--accentSoft);
+}
+
+/* Booha color variants per tab */
+.accordion.tab-1 details[open]{
+  border-color:var(--tab1);
+  box-shadow:
+    0 0 14px color-mix(in srgb,var(--tab1) 70%, transparent),
+    0 0 40px color-mix(in srgb,var(--tab1) 40%, #020617 60%);
+}
+.accordion.tab-1 details[open] .chevron{
+  border-color:var(--tab1);
+}
+.accordion.tab-2 details[open]{
+  border-color:var(--tab2);
+  box-shadow:
+    0 0 14px color-mix(in srgb,var(--tab2) 70%, transparent),
+    0 0 40px color-mix(in srgb,var(--tab2) 40%, #020617 60%);
+}
+.accordion.tab-2 details[open] .chevron{
+  border-color:var(--tab2);
+}
+.accordion.tab-3 details[open]{
+  border-color:var(--tab3);
+  box-shadow:
+    0 0 14px color-mix(in srgb,var(--tab3) 70%, transparent),
+    0 0 40px color-mix(in srgb,var(--tab3) 40%, #020617 60%);
+}
+.accordion.tab-3 details[open] .chevron{
+  border-color:var(--tab3);
+}
+.accordion.tab-4 details[open]{
+  border-color:var(--tab4);
+  box-shadow:
+    0 0 14px color-mix(in srgb,var(--tab4) 70%, transparent),
+    0 0 40px color-mix(in srgb,var(--tab4) 40%, #020617 60%);
+}
+.accordion.tab-4 details[open] .chevron{
+  border-color:var(--tab4);
+}
+.accordion.tab-5 details[open]{
+  border-color:var(--tab5);
+  box-shadow:
+    0 0 14px color-mix(in srgb,var(--tab5) 70%, transparent),
+    0 0 40px color-mix(in srgb,var(--tab5) 40%, #020617 60%);
+}
+.accordion.tab-5 details[open] .chevron{
+  border-color:var(--tab5);
+}
+
+/* Hover hint */
+.accordion summary:hover .acc-title{
+  color:#f9fafb;
+}
+.accordion summary:hover .chevron{
+  border-color:#e5e7eb;
+}
+
+/* Text blocks */
+.acc-body p{
+  margin-bottom:10px;
+}
+.acc-body p:last-child{
+  margin-bottom:0;
+}
+.acc-body ul{
+  margin:6px 0 10px 18px;
+}
+.acc-body li{
+  margin-bottom:4px;
+}
+
+/* Price emphasis (JP & EN) */
+.jp-price{
+  display:inline-block;
+}
+.jp-price strong{
+  font-weight:800;
+}
+.en-text ul li strong{
+  font-weight:800;
+}
+
+/* Fade-in sections */
+.fade-section{
+  opacity:0;
+  transform:translateY(16px);
+  transition:
+    opacity .65s ease,
+    transform .65s ease;
+}
+.fade-section.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Mobile */
+@media (max-width:640px){
+
+  /* 1pt smaller body text on mobile */
+  body{
+    font-size:14px;
+  }
+
+  .wrapper{
+    padding:18px 12px 60px;
+  }
+
+  .title-jp,
+  .title-en{
+    font-size:1.6rem;
+  }
+
+  /* Show 3-line JP title on mobile, hide single-line version */
+  .title-jp-desktop{
+    display:none;
+  }
+  .title-jp-mobile{
+    display:inline-block;
+  }
+
+  .acc-header{
+    padding:12px 14px;
+  }
+
+  /* Slightly smaller accordion text on mobile so prices look nicer */
+  .acc-body{
+    padding:0 14px 14px 14px;
+    font-size:0.9rem;
+  }
+
+  /* Prices: never break in ugly spots on mobile */
+  .jp-price{
+    white-space:nowrap;
+  }
+
+  .top-nav{
+    margin-bottom:12px;
+  }
+}
+</style>
 </head>
 <body>
 
-  <div class="swiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide"><img src="01.jpg" alt="01"></div>
-      <div class="swiper-slide"><img src="02.jpg" alt="02"></div>
-      <div class="swiper-slide"><img src="03.jpg" alt="03"></div>
-      <div class="swiper-slide"><img src="04.jpg" alt="04"></div>
-      <div class="swiper-slide"><img src="05.jpg" alt="05"></div>
-      <div class="swiper-slide"><img src="06.jpg" alt="06"></div>
-      <div class="swiper-slide"><img src="07.jpg" alt="07"></div>
-      <div class="swiper-slide"><img src="08.jpg" alt="08"></div>
-      <div class="swiper-slide"><img src="09.jpg" alt="09"></div>
-      <div class="swiper-slide"><img src="10.jpg" alt="10"></div>
-      <div class="swiper-slide"><img src="11.jpg" alt="11"></div>
-      <div class="swiper-slide"><img src="12.jpg" alt="12"></div>
-      <div class="swiper-slide"><img src="13.jpg" alt="13"></div>
-      <div class="swiper-slide"><img src="14.jpg" alt="14"></div>
-      <div class="swiper-slide"><img src="15.jpg" alt="15"></div>
-      <div class="swiper-slide"><img src="16.jpg" alt="16"></div>
-      <div class="swiper-slide"><img src="17.jpg" alt="17"></div>
-      <div class="swiper-slide"><img src="18.jpg" alt="18"></div>
-      <div class="swiper-slide"><img src="19.jpg" alt="19"></div>
-      <div class="swiper-slide"><img src="20.jpg" alt="20"></div>
-      <div class="swiper-slide"><img src="21.jpg" alt="21"></div>
-      <div class="swiper-slide"><img src="22.jpg" alt="22"></div>
-      <div class="swiper-slide"><img src="23.jpg" alt="23"></div>
-      <div class="swiper-slide"><img src="24.jpg" alt="24"></div>
-      <div class="swiper-slide"><img src="25.jpg" alt="25"></div>
-      <div class="swiper-slide"><img src="26.jpg" alt="26"></div>
-      <div class="swiper-slide"><img src="27.jpg" alt="27"></div>
-      <div class="swiper-slide"><img src="28.jpg" alt="28"></div>
-      <div class="swiper-slide"><img src="29.jpg" alt="29"></div>
-      <div class="swiper-slide"><img src="30.jpg" alt="30"></div>
-      <div class="swiper-slide"><img src="31.jpg" alt="31"></div>
-      <div class="swiper-slide"><img src="32.jpg" alt="32"></div>
-      <div class="swiper-slide"><img src="33.jpg" alt="33"></div>
-    </div>
+<!-- Language toggle radios (no JS) -->
+<input type="radio" name="lang" id="lang-jp" checked>
+<input type="radio" name="lang" id="lang-en">
 
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
+<div class="wrapper">
+
+  <!-- Back to main menu -->
+  <nav class="top-nav fade-section">
+    <a href="https://www.bryanharper.tokyo" class="back-btn">
+      <span class="jp-label">教室のメインページに戻る</span>
+      <span class="en-label">Back to Main Site</span>
+    </a>
+  </nav>
+
+  <!-- Header -->
+  <header class="page-header fade-section">
+    <h1 class="title-jp">
+      <span class="title-jp-desktop">学習システムとレッスン料金 2026</span>
+      <span class="title-jp-mobile">学習システムと<br>レッスン料金<br>2026</span>
+    </h1>
+
+    <div class="subtitle-jp">ブライアン英会話教室（Boo-riculum &amp; Booha Adventure）</div>
+
+    <div class="title-en">Our Learning System &amp; Lesson Prices 2026</div>
+    <div class="subtitle-en">Bryan’s English School (Boo-riculum &amp; Booha Adventure)</div>
+  </header>
+
+  <!-- Language buttons -->
+  <div class="lang-toggle-bar fade-section">
+    <label for="lang-jp" class="lang-btn">日本語</label>
+    <label for="lang-en" class="lang-btn">English</label>
   </div>
 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script>
-    const swiper = new Swiper('.swiper', {
-      loop: false,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      grabCursor: true,
-    });
-  </script>
+  <!-- Intro panel -->
+  <section class="intro-panel fade-section">
+    <p class="jp-text">
+      ブライアン英会話教室は、Boo-riculum（ブーリキュラム）と Booha Adventure（ブーハー・アドベンチャー）を使った「反転型・アウトプット中心」の英語教室です。このページでは、レッスン料金と基本の考え方、追加費用の有無についてまとめています。
+    </p>
+    <p class="en-text">
+      Bryan’s English School uses the Boo-riculum and Booha Adventure in a flipped, output-focused system. This page gives you a clear view of lesson prices, how the system works, and whether there are any extra fees.
+    </p>
+  </section>
+
+  <!-- Accordions -->
+  <section class="accordion-set">
+
+    <!-- 1. Group lessons (price first) -->
+    <article class="accordion tab-1 fade-section">
+      <details open>
+        <summary class="acc-header">
+          <div class="acc-title">
+            <span class="acc-index">01</span>
+            <span class="jp-label">グループレッスン料金</span>
+            <span class="en-label">Group Lesson Prices</span>
+          </div>
+          <div class="chevron"></div>
+        </summary>
+        <div class="acc-body">
+          <div class="jp-text">
+            <p>
+              Boo-riculum の週ごとの内容を使い、「聞くだけ」ではなく一人ひとりが英語を話す時間をしっかり取ります。年齢と定員に合わせてクラスを分けています。
+            </p>
+            <ul>
+              <li>幼稚園（5〜6歳）／25分・最大2名 … <span class="jp-price"><strong>月4,000円</strong></span></li>
+              <li>小学生〜中学生／50分・最大4名 … <span class="jp-price"><strong>月7,500円</strong></span></li>
+              <li>高校生〜大人／50分・最大3名 … <span class="jp-price"><strong>月7,500円</strong></span></li>
+              <li>追加プラン：グループ週2回（合計8レッスン） … <span class="jp-price"><strong>月15,000円</strong></span></li>
+            </ul>
+            <p>
+              少人数なので、恥ずかしがり屋の生徒さんでも、毎回「自分の番」が回ってくるレッスンです。
+            </p>
+          </div>
+          <div class="en-text">
+            <p>
+              Group lessons use the weekly Boo-riculum so students are not just listening — they are speaking, asking questions, and reacting. Classes are separated by age and kept small.
+            </p>
+            <ul>
+              <li>Kindergarten (age 5–6) / 25 min, max 2 students — <strong>¥4,000 / month</strong></li>
+              <li>Elementary – Junior High / 50 min, max 4 students — <strong>¥7,500 / month</strong></li>
+              <li>High School – Adults / 50 min, max 3 students — <strong>¥7,500 / month</strong></li>
+              <li>Extra Plan: Group twice per week (8 lessons) — <strong>¥15,000 / month</strong></li>
+            </ul>
+            <p>
+              The aim is simple: a small, safe group where everyone actually uses English each week.
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- 2. Private lessons -->
+    <article class="accordion tab-2 fade-section">
+      <details>
+        <summary class="acc-header">
+          <div class="acc-title">
+            <span class="acc-index">02</span>
+            <span class="jp-label">プライベートレッスン料金</span>
+            <span class="en-label">Private Lesson Prices</span>
+          </div>
+          <div class="chevron"></div>
+        </summary>
+        <div class="acc-body">
+          <div class="jp-text">
+            <p>
+              プライベートレッスンは、<strong>個別の目標に合わせた英語コーチング</strong>の時間です。Boo-riculum をベースにしながら、
+            </p>
+            <ul>
+              <li>学習アウトラインの作成</li>
+              <li>英語メールや文章の添削</li>
+              <li>プレゼン・面接の練習</li>
+              <li>長期的な目標に合わせたアドバイス</li>
+            </ul>
+            <p>
+              など、グループでは時間が足りない内容をじっくり行います（枠に限りがあります）。
+            </p>
+            <ul>
+              <li>週1回（50分 × 月4回）… <span class="jp-price"><strong>月15,000円</strong></span></li>
+              <li>週2回（50分 × 月8回）… <span class="jp-price"><strong>月30,000円</strong></span></li>
+            </ul>
+          </div>
+          <div class="en-text">
+            <p>
+              Private lessons are for students who need <strong>personalized English coaching</strong>. Using the Boo-riculum as a base, we can:
+            </p>
+            <ul>
+              <li>create a tailored study outline</li>
+              <li>edit emails, writing, or presentations</li>
+              <li>practice interviews or specific speaking tasks</li>
+              <li>plan long-term goals and keep you accountable</li>
+            </ul>
+            <p>
+              These are not just “smaller group lessons”; they are one-on-one sessions focused on your goals. Space is limited.
+            </p>
+            <ul>
+              <li>Once per week (4 × 50-minute lessons) — <strong>¥15,000 / month</strong></li>
+              <li>Twice per week (8 × 50-minute lessons) — <strong>¥30,000 / month</strong></li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- 3. How lessons work -->
+    <article class="accordion tab-3 fade-section">
+      <details>
+        <summary class="acc-header">
+          <div class="acc-title">
+            <span class="acc-index">03</span>
+            <span class="jp-label">レッスンのしくみ（Boo-riculum &amp; Booha Adventure）</span>
+            <span class="en-label">How Lessons Work (Boo-riculum &amp; Booha Adventure)</span>
+          </div>
+          <div class="chevron"></div>
+        </summary>
+        <div class="acc-body">
+          <div class="jp-text">
+            <p>
+              ブライアン英会話教室は、「反転型」のレッスンです。家で Boo-riculum を開き、単語・フレーズ・質問などをざっと確認してから教室に来ます。完璧に覚える必要はありませんが、「見たことがある」状態で来ることが大切です。
+            </p>
+            <p>
+              レッスンでは、Booha Adventure の内容も使いながら、<strong>自分のことを話す・質問する・リアクションする・パターンで文を作る</strong>など、アウトプットに集中します。
+            </p>
+            <p>
+              そのため、<strong>毎回のレッスンにデバイス（スマホ・タブレットなど）が必須</strong>です。デバイスがない場合、その週の Boo-riculum にアクセスできず、レッスンに参加しづらくなります。
+            </p>
+            <p>
+              また、子どもも大人も、<strong>自分の英語ノートを自分で管理すること</strong>をお願いしています。週ごとの単語・例文・自分のアイデア・短い日記・先生からのアドバイスなどをノートにためていきます。ノートは「提出する宿題」ではなく、自分の成長を見える形にするためのものです。
+            </p>
+          </div>
+          <div class="en-text">
+            <p>
+              Bryan’s English School is run as a flipped system. Students first open the Boo-riculum at home and quickly review that week’s vocabulary, phrases, and questions. They don’t need to memorize everything, but it should feel familiar before class.
+            </p>
+            <p>
+              In lessons, we use Booha Adventure and the weekly content to focus on <strong>output</strong>: talking about themselves, asking and answering questions, reacting, and building sentences with patterns.
+            </p>
+            <p>
+              Because of this, <strong>a device (phone or tablet) is required every lesson</strong>. Without a device, students cannot access the Boo-riculum for that week and will struggle to join the activities.
+            </p>
+            <p>
+              All students also keep a <strong>personal English notebook</strong>. They collect weekly vocabulary, example sentences, their own ideas and diary lines, plus corrections and advice. The notebook is not for “checking homework”; it is a record of their growth.
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- 4. Included / fees -->
+    <article class="accordion tab-4 fade-section">
+      <details>
+        <summary class="acc-header">
+          <div class="acc-title">
+            <span class="acc-index">04</span>
+            <span class="jp-label">料金に含まれるもの・追加費用</span>
+            <span class="en-label">What’s Included &amp; Extra Fees</span>
+          </div>
+          <div class="chevron"></div>
+        </summary>
+        <div class="acc-body">
+          <div class="jp-text">
+            <p>
+              ブライアン英会話教室では、次の費用はいただいておりません。
+            </p>
+            <ul>
+              <li>入会金 … <span class="jp-price"><strong>0円</strong></span></li>
+              <li>テキスト代（Boo-riculum 利用料）… <span class="jp-price"><strong>0円</strong></span></li>
+              <li>管理費・システム利用料 … <span class="jp-price"><strong>0円</strong></span></li>
+            </ul>
+            <p>
+              追加でかかる可能性があるのは、<strong>英語ノート代（1冊100〜200円ほど）</strong>のみです。ご家庭で用意していただいても、教室で購入していただいても大丈夫です。
+            </p>
+          </div>
+          <div class="en-text">
+            <p>
+              At Bryan’s English School, the following fees are <strong>not</strong> charged:
+            </p>
+            <ul>
+              <li>Enrollment fee — <strong>¥0</strong></li>
+              <li>Textbook / Boo-riculum usage fee — <strong>¥0</strong></li>
+              <li>Administrative or “system” fees — <strong>¥0</strong></li>
+            </ul>
+            <p>
+              The only possible extra cost is a <strong>notebook (around ¥100–¥200)</strong>. Families may prepare their own or purchase one at school.
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- 5. Trial & refund -->
+    <article class="accordion tab-5 fade-section">
+      <details>
+        <summary class="acc-header">
+          <div class="acc-title">
+            <span class="acc-index">05</span>
+            <span class="jp-label">最初の8回レッスン（半額）と返金について</span>
+            <span class="en-label">First 8 Lessons (Half-Price) &amp; Refunds</span>
+          </div>
+          <div class="chevron"></div>
+        </summary>
+        <div class="acc-body">
+          <div class="jp-text">
+            <p>
+              英語教室は、1回の体験だけでは本当の「合う・合わない」が分かりません。講師との相性や教室の雰囲気、Boo-riculum と Booha Adventure のスタイルに慣れるまで、少し時間が必要です。
+            </p>
+            <p>
+              そのため、<strong>最初の8回レッスン（約2ヶ月）を半額</strong>にしています。この期間は、教室側とご家庭の両方が「ここが合っているか」を落ち着いて判断するための時間です。
+            </p>
+            <p>
+              体験期間中に「合わない」と感じた場合は、<strong>未消化分のレッスン料金を返金</strong>します（月の途中でも大丈夫です）。「やめにくい空気」を作らないことを大切にしています。
+            </p>
+          </div>
+          <div class="en-text">
+            <p>
+              One free lesson is not enough to see if a school really fits. It takes time to feel the teacher’s style, the atmosphere, and whether the Boo-riculum and Booha Adventure work for your family.
+            </p>
+            <p>
+              For this reason, the <strong>first 8 lessons (about two months) are half price</strong>. This is a realistic trial period for everyone to decide honestly if it is a good match.
+            </p>
+            <p>
+              If, during this period, you feel it is not the right fit, <strong>I refund the remaining unused lessons</strong>, even in the middle of a month. I do not want anyone to feel stuck or pressured to continue.
+            </p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+  </section>
+</div>
+
+<script>
+// Only one accordion open at a time
+document.querySelectorAll('.accordion details').forEach((detail) => {
+  detail.addEventListener('toggle', () => {
+    if (detail.open) {
+      document.querySelectorAll('.accordion details').forEach((other) => {
+        if (other !== detail && other.open) {
+          other.open = false;
+        }
+      });
+    }
+  });
+});
+
+// Fade-in on scroll
+const fadeSections = document.querySelectorAll('.fade-section');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+fadeSections.forEach(sec => observer.observe(sec));
+</script>
 
 </body>
 </html>
