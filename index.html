@@ -408,14 +408,37 @@ body{
 }
 
 /* Price emphasis (JP & EN) */
-.jp-price{
+.jp-price,
+.en-price{
   display:inline-block;
 }
-.jp-price strong{
+
+/* Base price tag style */
+.price-tag{
+  display:inline-flex;
+  align-items:center;
+  padding:2px 10px;
+  border-radius:999px;
+  background:radial-gradient(circle at top left,#f9fafb,#e5e7eb 45%,#d1d5db 100%);
+  color:#111827;
   font-weight:800;
+  font-size:0.95rem;
+  letter-spacing:0.04em;
+  box-shadow:
+    0 0 10px rgba(250,250,250,.75),
+    0 0 26px rgba(56,189,248,.35);
 }
-.en-text ul li strong{
-  font-weight:800;
+.price-tag strong{
+  font-weight:900;
+}
+
+/* Extra emphasis for "0円 / ¥0" */
+.price-zero{
+  background:radial-gradient(circle at top left,#bbf7d0,#22c55e 40%,#14532d 100%);
+  color:#022c22;
+  box-shadow:
+    0 0 12px rgba(74,222,128,.95),
+    0 0 32px rgba(34,197,94,.7);
 }
 
 /* Fade-in sections */
@@ -467,7 +490,8 @@ body{
   }
 
   /* Prices: never break in ugly spots on mobile */
-  .jp-price{
+  .jp-price,
+  .en-price{
     white-space:nowrap;
   }
 
@@ -542,10 +566,18 @@ body{
               Boo-riculum の週ごとの内容を使い、「聞くだけ」ではなく一人ひとりが英語を話す時間をしっかり取ります。年齢と定員に合わせてクラスを分けています。
             </p>
             <ul>
-              <li>幼稚園（5〜6歳）／25分・最大2名 … <span class="jp-price"><strong>月4,000円</strong></span></li>
-              <li>小学生〜中学生／50分・最大4名 … <span class="jp-price"><strong>月7,500円</strong></span></li>
-              <li>高校生〜大人／50分・最大3名 … <span class="jp-price"><strong>月7,500円</strong></span></li>
-              <li>追加プラン：グループ週2回（合計8レッスン） … <span class="jp-price"><strong>月15,000円</strong></span></li>
+              <li>幼稚園（5〜6歳）／25分・最大2名 … 
+                <span class="jp-price price-tag"><strong>月4,000円</strong></span>
+              </li>
+              <li>小学生〜中学生／50分・最大4名 … 
+                <span class="jp-price price-tag"><strong>月7,500円</strong></span>
+              </li>
+              <li>高校生〜大人／50分・最大3名 … 
+                <span class="jp-price price-tag"><strong>月7,500円</strong></span>
+              </li>
+              <li>追加プラン：グループ週2回（合計8レッスン） … 
+                <span class="jp-price price-tag"><strong>月15,000円</strong></span>
+              </li>
             </ul>
             <p>
               少人数なので、恥ずかしがり屋の生徒さんでも、毎回「自分の番」が回ってくるレッスンです。
@@ -556,10 +588,18 @@ body{
               Group lessons use the weekly Boo-riculum so students are not just listening — they are speaking, asking questions, and reacting. Classes are separated by age and kept small.
             </p>
             <ul>
-              <li>Kindergarten (age 5–6) / 25 min, max 2 students — <strong>¥4,000 / month</strong></li>
-              <li>Elementary – Junior High / 50 min, max 4 students — <strong>¥7,500 / month</strong></li>
-              <li>High School – Adults / 50 min, max 3 students — <strong>¥7,500 / month</strong></li>
-              <li>Extra Plan: Group twice per week (8 lessons) — <strong>¥15,000 / month</strong></li>
+              <li>Kindergarten (age 5–6) / 25 min, max 2 students — 
+                <span class="en-price price-tag"><strong>¥4,000 / month</strong></span>
+              </li>
+              <li>Elementary – Junior High / 50 min, max 4 students — 
+                <span class="en-price price-tag"><strong>¥7,500 / month</strong></span>
+              </li>
+              <li>High School – Adults / 50 min, max 3 students — 
+                <span class="en-price price-tag"><strong>¥7,500 / month</strong></span>
+              </li>
+              <li>Extra Plan: Group twice per week (8 lessons) — 
+                <span class="en-price price-tag"><strong>¥15,000 / month</strong></span>
+              </li>
             </ul>
             <p>
               The aim is simple: a small, safe group where everyone actually uses English each week.
@@ -595,8 +635,12 @@ body{
               など、グループでは時間が足りない内容をじっくり行います（枠に限りがあります）。
             </p>
             <ul>
-              <li>週1回（50分 × 月4回）… <span class="jp-price"><strong>月15,000円</strong></span></li>
-              <li>週2回（50分 × 月8回）… <span class="jp-price"><strong>月30,000円</strong></span></li>
+              <li>週1回（50分 × 月4回）… 
+                <span class="jp-price price-tag"><strong>月15,000円</strong></span>
+              </li>
+              <li>週2回（50分 × 月8回）… 
+                <span class="jp-price price-tag"><strong>月30,000円</strong></span>
+              </li>
             </ul>
           </div>
           <div class="en-text">
@@ -613,8 +657,12 @@ body{
               These are not just “smaller group lessons”; they are one-on-one sessions focused on your goals. Space is limited.
             </p>
             <ul>
-              <li>Once per week (4 × 50-minute lessons) — <strong>¥15,000 / month</strong></li>
-              <li>Twice per week (8 × 50-minute lessons) — <strong>¥30,000 / month</strong></li>
+              <li>Once per week (4 × 50-minute lessons) — 
+                <span class="en-price price-tag"><strong>¥15,000 / month</strong></span>
+              </li>
+              <li>Twice per week (8 × 50-minute lessons) — 
+                <span class="en-price price-tag"><strong>¥30,000 / month</strong></span>
+              </li>
             </ul>
           </div>
         </div>
@@ -682,12 +730,24 @@ body{
               ブライアン英会話教室では、次の費用はいただいておりません。
             </p>
             <ul>
-              <li>入会金 … <span class="jp-price"><strong>0円</strong></span></li>
-              <li>テキスト代（Boo-riculum 利用料）… <span class="jp-price"><strong>0円</strong></span></li>
-              <li>管理費・システム利用料 … <span class="jp-price"><strong>0円</strong></span></li>
+              <li>入会金 … 
+                <span class="jp-price price-tag price-zero"><strong>0円</strong></span>
+              </li>
+              <li>テキスト代（Boo-riculum 利用料）… 
+                <span class="jp-price price-tag price-zero"><strong>0円</strong></span>
+              </li>
+              <li>管理費・システム利用料 … 
+                <span class="jp-price price-tag price-zero"><strong>0円</strong></span>
+              </li>
             </ul>
             <p>
               追加でかかる可能性があるのは、<strong>英語ノート代（1冊100〜200円ほど）</strong>のみです。ご家庭で用意していただいても、教室で購入していただいても大丈夫です。
+            </p>
+            <p>
+              月謝以外に、毎月自動的に引き落とされる「よく分からない費用」はありません。イベント参加費などが発生する場合は、必ず事前に金額と内容をお伝えし、「希望者のみ・その都度お支払い」という形にしています。
+            </p>
+            <p>
+              「あとから追加で色々と請求されるのでは？」という不安をなくし、<strong>シンプルで分かりやすい料金体系</strong>にすることを大切にしています。
             </p>
           </div>
           <div class="en-text">
@@ -695,12 +755,24 @@ body{
               At Bryan’s English School, the following fees are <strong>not</strong> charged:
             </p>
             <ul>
-              <li>Enrollment fee — <strong>¥0</strong></li>
-              <li>Textbook / Boo-riculum usage fee — <strong>¥0</strong></li>
-              <li>Administrative or “system” fees — <strong>¥0</strong></li>
+              <li>Enrollment fee — 
+                <span class="en-price price-tag price-zero"><strong>¥0</strong></span>
+              </li>
+              <li>Textbook / Boo-riculum usage fee — 
+                <span class="en-price price-tag price-zero"><strong>¥0</strong></span>
+              </li>
+              <li>Administrative or “system” fees — 
+                <span class="en-price price-tag price-zero"><strong>¥0</strong></span>
+              </li>
             </ul>
             <p>
-              The only possible extra cost is a <strong>notebook (around ¥100–¥200)</strong>. Families may prepare their own or purchase one at school.
+              The only regular extra cost you might see is a <strong>notebook (around ¥100–¥200)</strong>. Families may prepare their own or purchase one at school.
+            </p>
+            <p>
+              There are no hidden monthly charges beyond tuition. If a seasonal event or special project has a participation fee, I always explain the details and price in advance, and it is completely optional.
+            </p>
+            <p>
+              The goal is a <strong>simple, transparent price structure</strong> so you can focus on your child’s progress, not on surprise bills.
             </p>
           </div>
         </div>
