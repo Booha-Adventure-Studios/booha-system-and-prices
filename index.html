@@ -10,9 +10,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
 
 <style>
-/* ══════════════════════════════════════════
-   TOKENS — warm amber variant
-══════════════════════════════════════════ */
 :root {
   --bg:       #0e0d14;
   --bg2:      #13111e;
@@ -25,7 +22,6 @@
   --muted:    #8a87a8;
   --ivory:    #f5f0e4;
 
-  /* Warm accent palette */
   --gold:     #f5c842;
   --amber:    #f59e2a;
   --coral:    #ff8a6e;
@@ -33,13 +29,13 @@
   --lavender: #b09cff;
   --rose:     #ff82b0;
 
-  /* Section colors */
-  --c1: #ff8a6e;   /* group      — coral    */
-  --c2: #4dd9c0;   /* private    — teal     */
-  --c3: #b09cff;   /* obs        — lavender */
-  --c4: #f5c842;   /* how        — gold     */
-  --c5: #5fc8ff;   /* included   — sky      */
-  --c6: #ff82b0;   /* trial      — rose     */
+  --c1: #ff8a6e;
+  --c2: #4dd9c0;
+  --c3: #b09cff;
+  --c4: #f5c842;
+  --c5: #5fc8ff;
+  --c6: #ff82b0;
+  --c7: #a0e070;
 
   --r:  16px;
   --r2: 10px;
@@ -60,7 +56,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Warm grid texture */
 body::before {
   content: '';
   position: fixed;
@@ -73,7 +68,6 @@ body::before {
   z-index: 0;
 }
 
-/* Warm glow orbs */
 body::after {
   content: '';
   position: fixed;
@@ -94,7 +88,6 @@ body::after {
   z-index: 1;
 }
 
-/* ── Back nav ── */
 .top-nav { margin-bottom: 20px; }
 .back-btn {
   display: inline-flex;
@@ -113,7 +106,6 @@ body::after {
 .back-btn:hover { color: var(--ivory); border-color: rgba(255,255,255,.2); transform: translateX(-2px); }
 .back-btn svg { flex-shrink: 0; }
 
-/* ── Header ── */
 .page-header {
   text-align: center;
   padding: 32px 20px 26px;
@@ -157,7 +149,6 @@ body::after {
   margin: 0 auto;
 }
 
-/* ── Language pill ── */
 .lang-pill {
   display: flex;
   justify-content: center;
@@ -189,7 +180,6 @@ body::after {
   box-shadow: 0 2px 10px rgba(0,0,0,.45);
 }
 
-/* ── Intro card ── */
 .intro-card {
   background: var(--surface);
   border: 1px solid var(--border2);
@@ -204,9 +194,6 @@ body::after {
 }
 .jp .intro-card { font-family: 'Noto Sans JP', sans-serif; font-size: 14px; line-height: 2; }
 
-/* ══════════════════════════════════════════
-   ACCORDION
-══════════════════════════════════════════ */
 .acc-list {
   display: flex;
   flex-direction: column;
@@ -221,13 +208,13 @@ body::after {
   transition: border-color .2s, box-shadow .2s;
 }
 
-/* Per-section color via CSS var */
 .acc-item[data-color="1"] { --c: var(--c1); }
 .acc-item[data-color="2"] { --c: var(--c2); }
 .acc-item[data-color="3"] { --c: var(--c3); }
 .acc-item[data-color="4"] { --c: var(--c4); }
 .acc-item[data-color="5"] { --c: var(--c5); }
 .acc-item[data-color="6"] { --c: var(--c6); }
+.acc-item[data-color="7"] { --c: var(--c7); }
 
 .acc-item.open {
   border-color: color-mix(in srgb, var(--c) 40%, transparent);
@@ -249,7 +236,6 @@ body::after {
 }
 .acc-item.open .acc-btn { background: rgba(255,255,255,.02); }
 
-/* Left stripe */
 .acc-stripe {
   width: 3px;
   height: 36px;
@@ -312,7 +298,6 @@ body::after {
   color: var(--c);
 }
 
-/* Panel */
 .acc-panel {
   max-height: 0;
   overflow: hidden;
@@ -343,7 +328,6 @@ body::after {
 .panel-body strong { color: var(--ivory); font-weight: 600; }
 .panel-body em { color: var(--muted); font-style: italic; }
 
-/* Price rows */
 .price-list {
   list-style: none;
   padding: 0;
@@ -376,12 +360,10 @@ body::after {
 }
 .jp .price-list .pl-price { font-family: 'Noto Sans JP', sans-serif; }
 
-/* Zero-price badge */
 .price-list.zeroes li { border-color: rgba(77,217,192,.2); }
 .price-list.zeroes .pl-price { color: var(--teal); }
 .price-list.zeroes li { background: rgba(77,217,192,.04); }
 
-/* Callout */
 .callout {
   margin-top: 14px;
   background: color-mix(in srgb, var(--c) 7%, transparent);
@@ -394,7 +376,6 @@ body::after {
 }
 .callout strong { color: var(--c); }
 
-/* Bullet list inside panels */
 .bullet-list {
   list-style: none;
   padding: 0;
@@ -420,7 +401,6 @@ body::after {
   opacity: .6;
 }
 
-/* Section divider label */
 .section-divider {
   display: flex;
   align-items: center;
@@ -443,7 +423,6 @@ body::after {
   background: var(--border);
 }
 
-/* Fade-in animation */
 .fade-up {
   opacity: 0;
   transform: translateY(18px);
@@ -454,7 +433,6 @@ body::after {
   transform: translateY(0);
 }
 
-/* ── Footer ── */
 .footer {
   margin-top: 52px;
   text-align: center;
@@ -465,7 +443,6 @@ body::after {
 }
 .footer span { color: var(--gold); }
 
-/* ── Responsive ── */
 @media (max-width: 580px) {
   .acc-btn { padding: 15px 14px; }
   .acc-panel-inner { padding: 0 14px 20px; }
@@ -484,7 +461,6 @@ body::after {
 
 <div class="wrap" id="root">
 
-  <!-- Back -->
   <nav class="top-nav fade-up">
     <a href="https://www.bryanharper.tokyo" class="back-btn">
       <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -492,14 +468,12 @@ body::after {
     </a>
   </nav>
 
-  <!-- Header -->
   <header class="page-header fade-up">
     <div class="eyebrow">Bryan's English School</div>
     <h1 class="page-title jp" id="page-title">学習システムとレッスン料金</h1>
     <p class="page-sub" id="page-sub">ブライアン英会話教室（Booha Adventure）</p>
   </header>
 
-  <!-- Language toggle -->
   <div class="lang-pill fade-up">
     <div class="lang-inner">
       <button class="langBtn" id="btnEN" type="button">English</button>
@@ -507,12 +481,11 @@ body::after {
     </div>
   </div>
 
-  <!-- Intro -->
   <div class="intro-card fade-up">
-    <p id="intro-text">ブライアン英会話教室では、Booha Adventureアプリを使った「反転型・アウトプット重視」のシステムでレッスンを行っています。このページでは、レッスン料金、システムの仕組み、そしてどのような学習が行われるのかを分かりやすく説明しています。</p>
+    <p id="intro-text">ブライアン英会話教室では、Booha Adventureアプリを使った反転型・アウトプット重視のシステムでレッスンを行っています。このページでは、レッスン料金、仕組み、そして何を期待できるかを説明しています。</p>
   </div>
 
-  <!-- ══ PRICING ══ -->
+  <!-- PRICING -->
   <div class="section-divider fade-up"><span id="div1-label">料金</span></div>
 
   <div class="acc-list">
@@ -532,19 +505,19 @@ body::after {
         <div class="acc-panel-inner">
           <div class="panel-body">
             <div class="lang-jp">
-              <p>グループレッスンではBooha Adventureを使用し、ただ聞くだけではなく、話す・質問する・リアクションすることを重視しています。年齢ごとにクラスを分け、少人数で行います。</p>
+              <p>グループレッスンではBooha Adventureを使用します。ただ聞くだけでなく、話す・質問する・反応することを中心に進めます。年齢ごとにクラスを分け、少人数で行います。</p>
               <p><strong>体験を始める前に、全員面談への参加が必要です。</strong></p>
               <ul class="price-list">
-                <li><span class="pl-label">幼稚園（5〜6歳）／25分・最大2名</span><span class="pl-price">月 ¥4,000</span></li>
-                <li><span class="pl-label">小学生〜中学生／50分・最大4名</span><span class="pl-price">月 ¥7,500</span></li>
-                <li><span class="pl-label">高校生〜大人／50分・最大3名</span><span class="pl-price">月 ¥7,500</span></li>
-                <li><span class="pl-label">追加プラン：週2回（合計8レッスン）</span><span class="pl-price">月 ¥15,000</span></li>
+                <li><span class="pl-label">幼稚園（5〜6歳）/ 25分・最大2名</span><span class="pl-price">月 ¥4,000</span></li>
+                <li><span class="pl-label">小学生〜中学生 / 50分・最大4名</span><span class="pl-price">月 ¥7,500</span></li>
+                <li><span class="pl-label">高校生〜大人 / 50分・最大3名</span><span class="pl-price">月 ¥7,500</span></li>
+                <li><span class="pl-label">追加プラン：週2回（月8レッスン）</span><span class="pl-price">月 ¥15,000</span></li>
               </ul>
-              <p>目的はシンプルです。毎週、全員が実際に英語を使う、小さく集中した環境を作ることです。</p>
-              <div class="callout">Booha Adventureは月謝に含まれています。退会後も利用を続ける場合は、月額PINが必要になります。他のスクール向けにライセンス提供も行っています。</div>
+              <p>毎週、全員が実際に英語を使う、小さく集中した環境を作ることが目標です。</p>
+              <div class="callout">Booha Adventureは月謝に含まれています。退会後も利用を続ける場合は、月額PINが必要です。他のスクール向けのライセンス提供も行っています。</div>
             </div>
             <div class="lang-en" style="display:none">
-              <p>Group lessons use the Booha Adventure app, so students are not just listening — they are speaking, asking questions, and reacting. Classes are separated by age and kept small.</p>
+              <p>Group lessons use the Booha Adventure app. Students are not just listening — they are speaking, asking questions, and reacting. Classes are separated by age and kept small.</p>
               <p><strong>All students must attend a meeting before starting a trial period.</strong></p>
               <ul class="price-list">
                 <li><span class="pl-label">Kindergarten (age 5–6) / 25 min, max 2 students</span><span class="pl-price">¥4,000 / month</span></li>
@@ -567,7 +540,7 @@ body::after {
         <div class="acc-label">
           <div class="acc-tag" data-en="02 — Pricing" data-jp="02 — 料金">02 — 料金</div>
           <div class="acc-title" data-en="Private Lesson Prices" data-jp="プライベートレッスン料金">プライベートレッスン料金</div>
-          <div class="acc-sub" data-en="Personalized coaching at your level and pace." data-jp="個別コーチング。レベルとペースに合わせた内容。">個別コーチング。レベルとペースに合わせた内容。</div>
+          <div class="acc-sub" data-en="Individual coaching at your level and pace." data-jp="個別コーチング。レベルとペースに合わせた内容。">個別コーチング。レベルとペースに合わせた内容。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
@@ -575,10 +548,10 @@ body::after {
         <div class="acc-panel-inner">
           <div class="panel-body">
             <div class="lang-jp">
-              <p>プライベートレッスンは、より個別に集中して英語を学びたい方のためのレッスンです。Booha Adventureをベースにしながら、生徒のレベル・ペース・目標に合わせて内容を調整します。プライベートレッスンは、生徒自身が主導する形になります。やりたいことが明確な方に向いています。</p>
+              <p>プライベートレッスンは、個別に集中して英語を学びたい方のためのレッスンです。Booha Adventureをベースにしながら、生徒のレベル・ペース・目標に合わせて内容を調整します。やりたいことが明確な方に向いています。</p>
               <ul class="bullet-list">
                 <li>個別の学習プラン作成</li>
-                <li>毎回のレッスン後に届く英語＋日本語の個別メモ</li>
+                <li>毎回のレッスン後に届く英語・日本語の個別メモ</li>
                 <li>面接・プレゼンなどの対策</li>
                 <li>長期的な目標に向けたサポート</li>
               </ul>
@@ -588,7 +561,7 @@ body::after {
               <div class="callout">現在プライベートレッスンを受けている生徒の料金は変更されません。この料金は<strong>新規の方に適用</strong>されます。</div>
             </div>
             <div class="lang-en" style="display:none">
-              <p>Private lessons are for students who need more focused, individual English coaching. I use Booha Adventure as the base, but the lesson is adjusted to the student's level, pace, and goals. Private students are in control of the lesson — these work best for students who know what they want.</p>
+              <p>Private lessons are for students who need focused, individual English coaching. I use Booha Adventure as the base, but adjust the lesson to the student's level, pace, and goals. These work best for students who know what they want.</p>
               <ul class="bullet-list">
                 <li>A tailored study outline</li>
                 <li>Personalized lesson notes after each session in English and Japanese</li>
@@ -596,9 +569,9 @@ body::after {
                 <li>Clear long-term guidance</li>
               </ul>
               <ul class="price-list">
-                <li><span class="pl-label">Once per week (4 × 50-minute lessons)</span><span class="pl-price">¥20,000 / month</span></li>
+                <li><span class="pl-label">Once per week (4 x 50-minute lessons)</span><span class="pl-price">¥20,000 / month</span></li>
               </ul>
-              <div class="callout">Current private students are not affected. This rate applies to <strong>new students only</strong>.</div>
+              <div class="callout">Current private students are not affected. This rate applies to <strong>new students only.</strong></div>
             </div>
           </div>
         </div>
@@ -612,7 +585,7 @@ body::after {
         <div class="acc-label">
           <div class="acc-tag" data-en="03 — Special" data-jp="03 — 特別">03 — 特別</div>
           <div class="acc-title" data-en="Parent Observation Lessons" data-jp="親子オブザベーションレッスン">親子オブザベーションレッスン</div>
-          <div class="acc-sub" data-en="Not a passive visit — parents join the lesson actively." data-jp="後ろで見るだけではありません。親御さんも参加します。">後ろで見るだけではありません。親御さんも参加します。</div>
+          <div class="acc-sub" data-en="Parents join the lesson. Not a passive visit." data-jp="後ろで見るだけではありません。親御さんも参加します。">後ろで見るだけではありません。親御さんも参加します。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
@@ -620,25 +593,25 @@ body::after {
         <div class="acc-panel-inner">
           <div class="panel-body">
             <div class="lang-jp">
-              <p>親御さん向けのオブザベーションレッスンを行っていますが、これは後ろで見るだけの見学ではありません。親御さんにもお子さんと一緒にレッスンに参加していただきます。</p>
-              <p>後ろで立って見るだけの見学はあまり意味がないと考えています。実際にレッスンに入り、<strong>答える・待つ・考える・分からない中でやる</strong>という体験をすることで、お子さんが何を感じているのか、何が必要なのかがよく分かります。</p>
-              <p>このレッスンは親子1組のプライベート形式です。できるだけ兄弟姉妹の同伴はご遠慮ください。親子ともに集中して参加していただくためです。</p>
+              <p>親御さん向けのオブザベーションレッスンは、後ろで見るだけの見学ではありません。親御さんにもお子さんと一緒にレッスンに参加していただきます。</p>
+              <p>実際にレッスンに入り、<strong>答える・待つ・考える・分からない中でやる</strong>という体験をすることで、お子さんが何を感じているのか、家庭で何が必要なのかが分かります。</p>
+              <p>このレッスンは親子1組のプライベート形式です。できるだけ兄弟姉妹の同伴はご遠慮ください。</p>
               <div class="callout">システムの仕組みや、お子さんの学習の状態、<strong>家庭でどのようなサポートが必要か</strong>を理解したい方に向いています。</div>
             </div>
             <div class="lang-en" style="display:none">
-              <p>I offer parent observation lessons, but this is not a stand-in-the-back observation. Parents join the lesson actively with their child.</p>
-              <p>Passive observation doesn't help. It is far better to join the lesson — to answer, wait, think, and feel what the child is feeling. That is how you understand what the lesson requires and why some parts feel easy or difficult.</p>
-              <p>These are private parent-and-child lessons. It is best if no siblings come so both parent and child can focus.</p>
-              <div class="callout">These lessons are for families who want a clear understanding of how the system works, what their child is experiencing, and <strong>what actually helps at home</strong>.</div>
+              <p>Parent observation lessons are not stand-in-the-back visits. Parents join the lesson actively with their child.</p>
+              <p>It is far more useful to join the lesson — to answer, wait, think, and feel what the child is feeling. That is how you understand what the lesson requires and what helps at home.</p>
+              <p>These are private parent-and-child lessons. It is best if no siblings attend so both parent and child can focus.</p>
+              <div class="callout">These lessons are for families who want a clear understanding of how the system works, what their child is experiencing, and <strong>what actually helps at home.</strong></div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div><!-- .acc-list -->
+  </div>
 
-  <!-- ══ HOW IT WORKS ══ -->
+  <!-- HOW IT WORKS -->
   <div class="section-divider fade-up"><span id="div2-label">仕組み</span></div>
 
   <div class="acc-list">
@@ -650,7 +623,7 @@ body::after {
         <div class="acc-label">
           <div class="acc-tag" data-en="04 — System" data-jp="04 — 仕組み">04 — 仕組み</div>
           <div class="acc-title" data-en="How Lessons Work" data-jp="レッスンの仕組み">レッスンの仕組み</div>
-          <div class="acc-sub" data-en="Flipped system. Prepare at home, speak in class." data-jp="反転型レッスン。家で準備して、教室で話す。">反転型レッスン。家で準備して、教室で話す。</div>
+          <div class="acc-sub" data-en="Prepare at home. Speak in class." data-jp="家で準備して、教室で話す。">家で準備して、教室で話す。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
@@ -658,16 +631,16 @@ body::after {
         <div class="acc-panel-inner">
           <div class="panel-body">
             <div class="lang-jp">
-              <p>ブライアン英会話教室は反転型レッスンです。生徒は自宅でBooha Adventureを開き、自分に合った年間カリキュラムを選び、その週の単語・文・質問を事前に確認してから来ます。すべて覚える必要はありませんが、「見たことがある」状態で来ることが大切です。</p>
-              <p>レッスンでは、その週の内容を使いながらアウトプットを行います。質問に答える、自分のことを話す、やり取りする、文を作るといった活動を中心に進めます。</p>
-              <p>そのため、<strong>毎回デバイス（スマホ・タブレットなど）が必要です。</strong>デバイスがない場合、アプリにアクセスできず、レッスンへの参加が難しくなります。</p>
-              <p>すべての生徒は英語ノートを使用します。最低でも週ごとの単語を英語と日本語で書き、教室に持ってきてください。すべての内容を書くことが望ましいです。日記を書くことも強くおすすめします。何を書けばいいか分からない場合は、週の質問に答えることから始めてください。</p>
+              <p>ブライアン英会話教室は反転型レッスンです。生徒は自宅でBooha Adventureを開き、その週の単語・文・質問を確認してから来ます。すべて覚える必要はありませんが、「見たことがある」状態で来ることが大切です。</p>
+              <p>レッスンでは、その週の内容を使ってアウトプットを行います。質問に答える、自分のことを話す、やり取りする、文を作るといった活動を中心に進めます。</p>
+              <p><strong>毎回デバイス（スマホ・タブレット）が必要です。</strong>デバイスがない場合、アプリにアクセスできず、レッスンへの参加が難しくなります。</p>
+              <p>すべての生徒は英語ノートを使います。最低でも週ごとの単語を英語と日本語で書き、教室に持ってきてください。日記を書くことも強くおすすめします。何を書けばいいか分からない場合は、週の質問に答えることから始めてください。</p>
             </div>
             <div class="lang-en" style="display:none">
-              <p>Bryan's English School is run as a flipped system. Students open the Booha Adventure at home, choose one of the three yearly curricula that fits their goals, and review that week's vocabulary, sentences, and questions. They do not need to memorize everything, but it should feel familiar before class.</p>
-              <p>In lessons, we use the weekly content to focus on output: using questions to talk about themselves, ask and answer, react, and build sentences.</p>
-              <p>Because of this, <strong>a device (phone or tablet) is required every lesson.</strong> Without a device, students cannot access the app and will struggle to participate.</p>
-              <p>All students keep a personal English notebook. They must write at least the weekly vocabulary in English and Japanese and bring it to class. Writing all weekly content is better. Keeping a diary is strongly recommended. If students do not know what to write, they can start by answering the weekly questions.</p>
+              <p>Bryan's English School uses a flipped system. Students open the Booha Adventure at home and review that week's vocabulary, sentences, and questions before class. They do not need to memorize everything, but the content should feel familiar when they arrive.</p>
+              <p>In lessons, we use the weekly content to focus on output: talking about themselves, asking and answering, reacting, and building sentences.</p>
+              <p><strong>A device (phone or tablet) is required every lesson.</strong> Without one, students cannot access the app and will struggle to participate.</p>
+              <p>All students keep a personal English notebook. Write at least the weekly vocabulary in English and Japanese and bring it to class. Keeping a diary is strongly recommended. If students do not know what to write, they can start by answering the weekly questions.</p>
             </div>
           </div>
         </div>
@@ -680,7 +653,7 @@ body::after {
         <div class="acc-stripe"></div>
         <div class="acc-label">
           <div class="acc-tag" data-en="05 — Fees" data-jp="05 — 費用">05 — 費用</div>
-          <div class="acc-title" data-en="What's Included &amp; Extra Fees" data-jp="含まれるもの・追加費用">含まれるもの・追加費用</div>
+          <div class="acc-title" data-en="What's Included and Extra Fees" data-jp="含まれるもの・追加費用">含まれるもの・追加費用</div>
           <div class="acc-sub" data-en="No enrollment fee. No hidden charges." data-jp="入会金なし。隠れた追加費用もありません。">入会金なし。隠れた追加費用もありません。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
@@ -696,7 +669,7 @@ body::after {
                 <li><span class="pl-label">管理費・システム利用料</span><span class="pl-price">0円</span></li>
               </ul>
               <p>追加で必要になるのはノート代（約100〜200円）のみです。ご家庭で用意していただいても、教室で購入していただいても構いません。</p>
-              <p>月謝以外の不明な追加費用はありません。イベントや特別活動に費用がかかる場合は、事前に内容と金額を説明し、参加は任意です。</p>
+              <p>イベントや特別活動に費用がかかる場合は、事前に内容と金額を説明し、参加は任意です。</p>
               <div class="callout"><strong>月末に月謝袋をお渡しします。</strong>次のレッスン時にご提出ください。</div>
             </div>
             <div class="lang-en" style="display:none">
@@ -706,9 +679,9 @@ body::after {
                 <li><span class="pl-label">Textbook / Booha Adventure usage fee</span><span class="pl-price">¥0</span></li>
                 <li><span class="pl-label">Administrative or system fees</span><span class="pl-price">¥0</span></li>
               </ul>
-              <p>The only regular extra cost is a notebook (around ¥100–¥200). Families can prepare their own or purchase one at school.</p>
-              <p>There are no hidden monthly charges beyond tuition. If there is a seasonal event or special activity, I explain it clearly in advance and it is optional.</p>
-              <div class="callout"><strong>A tuition envelope is given out at the end of each month.</strong> Please return it during the next few lessons.</div>
+              <p>The only regular extra cost is a notebook (around ¥100–¥200). Families can bring their own or purchase one at school.</p>
+              <p>If there is a seasonal event or special activity with a cost, I explain it clearly in advance and participation is optional.</p>
+              <div class="callout"><strong>A tuition envelope is given out at the end of each month.</strong> Please return it at the next lesson.</div>
             </div>
           </div>
         </div>
@@ -721,8 +694,8 @@ body::after {
         <div class="acc-stripe"></div>
         <div class="acc-label">
           <div class="acc-tag" data-en="06 — Trial" data-jp="06 — 体験">06 — 体験</div>
-          <div class="acc-title" data-en="First 8 Lessons (Half-Price) &amp; Refunds" data-jp="最初の8回レッスン（半額）と返金について">最初の8回レッスン（半額）と返金について</div>
-          <div class="acc-sub" data-en="A real trial period — not just one free lesson." data-jp="本当の体験期間。1回だけの無料体験ではありません。">本当の体験期間。1回だけの無料体験ではありません。</div>
+          <div class="acc-title" data-en="First 8 Lessons and Refunds" data-jp="最初の8回レッスンと返金について">最初の8回レッスンと返金について</div>
+          <div class="acc-sub" data-en="A real trial period with flexible scheduling." data-jp="本当の体験期間。日程は柔軟に対応します。">本当の体験期間。日程は柔軟に対応します。</div>
         </div>
         <div class="acc-icon" aria-hidden="true">+</div>
       </button>
@@ -731,32 +704,77 @@ body::after {
           <div class="panel-body">
             <div class="lang-jp">
               <p>1回の体験だけでは、その教室が合っているかどうかは分かりません。システムや進め方、ペースを理解するには時間が必要です。</p>
-              <p>そのため、<strong>最初の8回（約2ヶ月）は半額</strong>でご案内しています。これは、生徒と教室の両方がしっかり判断するための現実的な体験期間です。</p>
+              <p>そのため、<strong>最初の8回は月額4,000円</strong>でご案内しています。これは、生徒と教室の両方がしっかり判断するための体験期間です。日程は柔軟に対応します。</p>
               <p>この期間中に合わないと感じた場合は、<strong>未消化分のレッスン料金を返金します。</strong>月の途中でも対応します。</p>
-              <div class="callout">生徒はこの期間でも、参加・準備・家庭での学習が求められます。ここはアウトプット中心の教室です。<strong>準備して、話す姿勢で来てください。</strong></div>
+              <div class="callout">体験期間中も、参加・準備・家庭での学習が求められます。ここはアウトプット中心の教室です。<strong>準備して、話す姿勢で来てください。</strong></div>
             </div>
             <div class="lang-en" style="display:none">
-              <p>One free lesson is not enough to understand if a school is a good fit. It takes time to understand the system, the expectations, and the pace.</p>
-              <p>For this reason, the <strong>first 8 lessons (about two months) are offered at half price.</strong> This is a realistic trial period for both the student and the school.</p>
-              <p>If, during this time, you feel it is not the right fit, <strong>I refund the remaining unused lessons,</strong> even in the middle of a month.</p>
-              <div class="callout">Students are still expected to participate, prepare, and write the weekly content at home. This is an output-based school. <strong>Come prepared and be ready to speak.</strong></div>
+              <p>One free lesson is not enough to understand if a school is the right fit. It takes time to understand the system, the expectations, and the pace.</p>
+              <p>For this reason, the <strong>first 8 lessons are offered at ¥4,000 per month.</strong> This is a realistic trial period for both the student and the school. Trial dates are flexible.</p>
+              <p>If during this time you feel it is not the right fit, <strong>I refund the remaining unused lessons,</strong> even in the middle of a month.</p>
+              <div class="callout">Students are still expected to participate, prepare, and study at home during the trial. This is an output-based school. <strong>Come prepared and be ready to speak.</strong></div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div><!-- .acc-list -->
+  </div>
+
+  <!-- TESTING -->
+  <div class="section-divider fade-up"><span id="div3-label">テスト</span></div>
+
+  <div class="acc-list">
+
+    <!-- 07 EIKEN / TOEIC Practice Tests -->
+    <div class="acc-item fade-up" data-color="7">
+      <button class="acc-btn" type="button" aria-expanded="false">
+        <div class="acc-stripe"></div>
+        <div class="acc-label">
+          <div class="acc-tag" data-en="07 — Testing" data-jp="07 — テスト">07 — テスト</div>
+          <div class="acc-title" data-en="EIKEN and TOEIC Practice Tests" data-jp="英検・TOEIC 練習テスト">英検・TOEIC 練習テスト</div>
+          <div class="acc-sub" data-en="Honest results. No cramming. No ranking." data-jp="正直なレベル確認。詰め込みではありません。">正直なレベル確認。詰め込みではありません。</div>
+        </div>
+        <div class="acc-icon" aria-hidden="true">+</div>
+      </button>
+      <div class="acc-panel">
+        <div class="acc-panel-inner">
+          <div class="panel-body">
+            <div class="lang-jp">
+              <p>英検・TOEICの練習テストを実施しています。テストは教室内でデバイスを使って行い、どの部分を伸ばすべきかを具体的に確認できます。</p>
+              <p>点数で順位をつけるためではありません。<strong>今の自分の現在地を正直に知るためのものです。</strong>その結果をもとに、年間カリキュラムで着実に力を伸ばしていきます。</p>
+              <p>ここは詰め込み型のスクールではありません。短期間でスコアを上げる訓練はしていません。英語を使える力を積み上げていく中で、テストの結果もついてきます。</p>
+              <ul class="price-list">
+                <li><span class="pl-label">在校生</span><span class="pl-price">無料</span></li>
+                <li><span class="pl-label">Booha Adventure利用中の非在校生（テスト日参加）</span><span class="pl-price">¥2,000</span></li>
+              </ul>
+              <div class="callout">テスト日のスケジュールは随時お知らせします。詳細は<strong>お問い合わせください。</strong></div>
+            </div>
+            <div class="lang-en" style="display:none">
+              <p>Practice tests are available for EIKEN and TOEIC. Tests are completed on a device at the school and show students exactly which areas need work.</p>
+              <p>This is not about ranking students. It is about giving an <strong>honest picture of where they are right now</strong> so the yearly curriculum can build from there.</p>
+              <p>This is not a cram school. Practice tests show where to grow, not how to score by next week. English ability built steadily over time is what produces results.</p>
+              <ul class="price-list">
+                <li><span class="pl-label">Current students</span><span class="pl-price">Free</span></li>
+                <li><span class="pl-label">Non-students using Booha Adventure (test day)</span><span class="pl-price">¥2,000</span></li>
+              </ul>
+              <div class="callout">Test day schedules will be announced. <strong>Contact us for more details.</strong></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
   <div class="footer fade-up">
     Bryan's English School &nbsp;·&nbsp; <span>Booha Adventure</span>
   </div>
 
-</div><!-- .wrap -->
+</div>
 
 <script>
 (() => {
-  /* ── Language ── */
   const btnEN    = document.getElementById('btnEN');
   const btnJP    = document.getElementById('btnJP');
   const pageTitle= document.getElementById('page-title');
@@ -765,6 +783,7 @@ body::after {
   const introTxt = document.getElementById('intro-text');
   const div1     = document.getElementById('div1-label');
   const div2     = document.getElementById('div2-label');
+  const div3     = document.getElementById('div3-label');
 
   const strings = {
     titleEN: 'Our Learning System &amp; Lesson Prices',
@@ -774,11 +793,13 @@ body::after {
     backEN:  'Back to Main Site',
     backJP:  '教室のメインページに戻る',
     introEN: "Bryan's English School uses the Booha Adventure app in a flipped, output-focused system. This page gives you a clear view of lesson prices, how the system works, and what to expect.",
-    introJP: 'ブライアン英会話教室では、Booha Adventureアプリを使った「反転型・アウトプット重視」のシステムでレッスンを行っています。このページでは、レッスン料金、システムの仕組み、そしてどのような学習が行われるのかを分かりやすく説明しています。',
+    introJP: 'ブライアン英会話教室では、Booha Adventureアプリを使った反転型・アウトプット重視のシステムでレッスンを行っています。このページでは、レッスン料金、仕組み、そして何を期待できるかを説明しています。',
     div1EN:  'Pricing',
     div1JP:  '料金',
     div2EN:  'How It Works',
     div2JP:  '仕組み',
+    div3EN:  'Testing',
+    div3JP:  'テスト',
   };
 
   function setLang(lang) {
@@ -790,18 +811,17 @@ body::after {
 
     pageTitle.innerHTML = isJP ? strings.titleJP : strings.titleEN;
     pageTitle.className = 'page-title' + (isJP ? ' jp' : '');
-    pageSub.textContent = isJP ? strings.subJP : strings.subEN;
-    backLabel.textContent = isJP ? strings.backJP : strings.backEN;
-    introTxt.textContent  = isJP ? strings.introJP : strings.introEN;
-    div1.textContent = isJP ? strings.div1JP : strings.div1EN;
-    div2.textContent = isJP ? strings.div2JP : strings.div2EN;
+    pageSub.textContent  = isJP ? strings.subJP  : strings.subEN;
+    backLabel.textContent= isJP ? strings.backJP : strings.backEN;
+    introTxt.textContent = isJP ? strings.introJP: strings.introEN;
+    div1.textContent     = isJP ? strings.div1JP : strings.div1EN;
+    div2.textContent     = isJP ? strings.div2JP : strings.div2EN;
+    div3.textContent     = isJP ? strings.div3JP : strings.div3EN;
 
-    /* Accordion header text */
     document.querySelectorAll('[data-en][data-jp]').forEach(el => {
       el.textContent = el.dataset[isJP ? 'jp' : 'en'];
     });
 
-    /* Panel content */
     document.querySelectorAll('.lang-jp, .lang-en').forEach(el => {
       if (el.classList.contains('lang-jp')) el.style.display = isJP ? '' : 'none';
       if (el.classList.contains('lang-en')) el.style.display = isJP ? 'none' : '';
@@ -811,9 +831,7 @@ body::after {
   btnEN.addEventListener('click', () => setLang('en'));
   btnJP.addEventListener('click', () => setLang('jp'));
 
-  /* ── Accordion — one open at a time, across all lists ── */
   const allItems = document.querySelectorAll('.acc-item');
-
   allItems.forEach(item => {
     item.querySelector('.acc-btn')?.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
@@ -828,7 +846,6 @@ body::after {
     });
   });
 
-  /* ── Fade-in on scroll ── */
   const fadeEls = document.querySelectorAll('.fade-up');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -840,7 +857,6 @@ body::after {
   }, { threshold: 0.1 });
   fadeEls.forEach(el => io.observe(el));
 
-  /* Initial language */
   setLang('jp');
 })();
 </script>
